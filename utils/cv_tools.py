@@ -23,3 +23,12 @@ def stamp_text(image, box, text=None, color=(255, 255, 255)):
     text_color = (255, 255, 255)
     text_x, text_y = textbox[0][0], textbox[1][1] - baseline
     cv2.putText(image, text, (text_x, text_y), font, font_scale, text_color, thickness)
+
+
+def create_video_writer(fps, width, height, output="output/output.mp4"):
+    ''' "output" should end with extension ".mp4". '''
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    width = int(width)
+    height = int(height)
+    print("Write video to {0}, fps: {1}, resolution: {2}*{3}.".format(output, fps, width, height))
+    return cv2.VideoWriter(output, fourcc, fps, (width, height))
