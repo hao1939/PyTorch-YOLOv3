@@ -25,6 +25,15 @@ def stamp_text(image, box, text=None, color=(255, 255, 255)):
     cv2.putText(image, text, (text_x, text_y), font, font_scale, text_color, thickness)
 
 
+def create_vedio_capture(input):
+    ''' input: video file path. Return (cap, (fps, width, height)). '''
+    cap = cv2.VideoCapture('../quebec_city_street_view.mp4')
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    return cap, (fps, width, height)
+
+
 def create_video_writer(fps, width, height, output="output/output.mp4"):
     ''' "output" should end with extension ".mp4". '''
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
