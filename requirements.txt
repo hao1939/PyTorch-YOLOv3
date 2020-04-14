@@ -8,3 +8,6 @@ terminaltables
 pillow
 tqdm
 opencv-python
+
+# for server
+flask
