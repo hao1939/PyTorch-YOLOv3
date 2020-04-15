@@ -11,3 +11,4 @@ opencv-python
 
 # for server
 flask
+flask-cors

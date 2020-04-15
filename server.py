@@ -1,7 +1,8 @@
 
 from PIL import Image
-from flask import Flask, escape, request, jsonify
+from flask import Flask, escape, request, jsonify, Response
 from score import init, preprocess, predict, postprocess
+from flask_cors import CORS
 
 import io
 
@@ -21,6 +22,7 @@ CONFIG = {
 init()
 
 app = Flask(__name__)
+CORS(app)
 
 CONFIG = {
     "model_def": "config/yolov3.cfg",
@@ -47,7 +49,10 @@ def score():
     buffer.seek(0)
     img = Image.open(buffer)
     detections = predict(img)
-    return jsonify(detections)
+
+    resp = jsonify(detections)
+    resp.status_code = 200
+    return resp
 
 
 @app.route('/metadata')
